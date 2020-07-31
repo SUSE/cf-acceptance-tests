@@ -253,9 +253,6 @@ func GuidForAppName(appName string) string {
 func CredhubDescribe(description string, callback func()) bool {
 	return Describe("[credhub]", func() {
 		BeforeEach(func() {
-			if Config.GetBackend() != "diego" {
-				Skip(skip_messages.SkipDiegoMessage)
-			}
 			if !(Config.GetIncludeCredhubAssisted() || Config.GetIncludeCredhubNonAssisted()) {
 				Skip(skip_messages.SkipCredhubMessage)
 			}
