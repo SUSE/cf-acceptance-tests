@@ -93,9 +93,10 @@ var _ = SshDescribe("SSH", func() {
 			// Newer Eirini has INSTANCE_INDEX fixed but until then, let's look for something that is there
 			Expect(string(output)).To(MatchRegexp("START_COMMAND=\\.\\/catnip"))
 
-			Eventually(func() *Buffer {
-				return logs.Recent(appName).Wait().Out
-			}).Should(Say("Successful remote access"))
+			// Eirini doesn't log ssh access
+			// Eventually(func() *Buffer {
+			// 	return logs.Recent(appName).Wait().Out
+			// }).Should(Say("Successful remote access"))
 			Eventually(func() string {
 				return string(cf.Cf("events", appName).Wait().Out.Contents())
 			}).Should(MatchRegexp("audit.app.ssh-authorized"))
@@ -135,9 +136,10 @@ var _ = SshDescribe("SSH", func() {
 			// Newer Eirini has INSTANCE_INDEX fixed but until then, let's look for something that is there
 			Expect(string(output)).To(MatchRegexp("START_COMMAND=\\.\\/catnip"))
 
-			Eventually(func() *Buffer {
-				return logs.Recent(appName).Wait().Out
-			}).Should(Say("Successful remote access"))
+			// Eirini doesn't log ssh access
+			// Eventually(func() *Buffer {
+			// 	return logs.Recent(appName).Wait().Out
+			// }).Should(Say("Successful remote access"))
 
 			Eventually(func() string {
 				return string(cf.Cf("events", appName).Wait().Out.Contents())
@@ -166,6 +168,9 @@ var _ = SshDescribe("SSH", func() {
 		})
 
 		It("records successful ssh attempts", func() {
+
+			Skip("Eirini doesn't log ssh access")
+
 			password := sshAccessCode()
 
 			clientConfig := &ssh.ClientConfig{
