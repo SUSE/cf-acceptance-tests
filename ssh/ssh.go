@@ -69,9 +69,10 @@ var _ = SshDescribe("SSH", func() {
 				Expect(string(stdErr)).To(MatchRegexp(fmt.Sprintf(`VCAP_APPLICATION=.*"application_name":"%s"`, appName)))
 				Expect(string(stdErr)).To(MatchRegexp("INSTANCE_INDEX=1"))
 
-				Eventually(func() *Buffer {
-					return logs.Recent(appName).Wait().Out
-				}).Should(Say("Successful remote access"))
+				// Eirini doesn't log ssh access
+				// Eventually(func() *Buffer {
+				// 	return logs.Recent(appName).Wait().Out
+				// }).Should(Say("Successful remote access"))
 
 				Eventually(func() string {
 					return string(cf.Cf("events", appName).Wait().Out.Contents())
