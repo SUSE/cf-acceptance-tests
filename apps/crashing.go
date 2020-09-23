@@ -58,6 +58,8 @@ var _ = AppsDescribe("Crashing", func() {
 		})
 
 		It("shows crash events", func() {
+			Skip("Known issue: https://www.pivotaltracker.com/story/show/174817357")
+
 			helpers.CurlApp(Config, appName, "/sigterm/KILL")
 
 			Eventually(func() string {
