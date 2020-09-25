@@ -38,6 +38,9 @@ var _ = AppsDescribe("Rolling deploys", func() {
 	})
 
 	It("deploys the app with zero downtime", func() {
+
+		Skip("https://www.pivotaltracker.com/n/projects/2172361/stories/171131343")
+
 		By("checking the app remains available")
 		doneChannel := make(chan bool, 1)
 		ticker := time.NewTicker(1 * time.Second)
