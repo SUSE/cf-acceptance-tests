@@ -41,6 +41,9 @@ var _ = AppsDescribe("Getting instance information", func() {
 		})
 
 		It("fails with insufficient resources", func() {
+
+			Skip("Eirini fails earlier without bringing the app down")
+
 			scale := cf.Cf("scale", appName, "-m", workflowhelpers.RUNAWAY_QUOTA_MEM_LIMIT, "-f")
 			Eventually(scale).Should(Or(Say("insufficient"), Say("down")))
 			scale.Kill()
