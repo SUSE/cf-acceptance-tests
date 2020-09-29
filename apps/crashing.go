@@ -27,7 +27,7 @@ var _ = AppsDescribe("Crashing", func() {
 	})
 
 	Describe("a continuously crashing app", func() {
-		FIt("emits crash events and reports as 'crashed' after enough crashes", func() {
+		It("emits crash events and reports as 'crashed' after enough crashes", func() {
 			Expect(cf.Cf(
 				"push",
 				appName,

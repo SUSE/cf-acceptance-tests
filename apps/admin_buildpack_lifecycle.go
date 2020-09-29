@@ -323,7 +323,6 @@ exit 1
 			// but ginkgo doesn't allow specific blocks to be marked as serial-only
 			// so we manually mimic setup/teardown pattern here
 
-			Skip("The ouput is interleaved with logs from isolation segments")
 			setupBadDetectBuildpack(appConfig{Empty: false})
 			itIsUsedForTheApp()
 
@@ -340,9 +339,6 @@ exit 1
 
 	Context("when the buildpack is specified", func() {
 		It("stages the app using the specified buildpack", func() {
-
-			Skip("The ouput is interleaved with logs from isolation segments")
-
 			setupBadDetectBuildpack(appConfig{Empty: false})
 
 			Expect(cf.Cf("push", appName, "-b", buildpackName, "-m", DEFAULT_MEMORY_LIMIT, "-p", appPath).Wait(Config.CfPushTimeoutDuration())).To(Exit(0))
