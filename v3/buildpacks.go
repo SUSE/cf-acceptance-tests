@@ -78,6 +78,9 @@ var _ = V3Describe("buildpack", func() {
 		})
 
 		It("Downloads the correct user specified git buildpack", func() {
+
+			Skip("https://github.com/cloudfoundry-incubator/eirini/issues/115")
+
 			if !Config.GetIncludeInternetDependent() {
 				Skip(skip_messages.SkipInternetDependentMessage)
 			}
